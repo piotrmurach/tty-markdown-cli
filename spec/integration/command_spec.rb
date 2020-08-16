@@ -7,9 +7,9 @@ RSpec.describe "tty-markdown command" do
   let(:cmd) { RSpec::Support::OS.windows? ? "tty-markdown" : "exe/tty-markdown" }
 
   it "runs with piped input" do
-    out, err, status = Open3.capture3("echo \"#Header\" | #{cmd}")
+    out, err, status = Open3.capture3("echo **bold** | #{cmd}")
 
-    expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
+    expect(out).to match(/\e\[33;1mbold\e\[0m/)
     expect(err).to eq("")
     expect(status.exitstatus).to eq(0)
   end
