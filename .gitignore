@@ -1,0 +1,13 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/Gemfile.lock
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+/man/tty-markdown.1
+
+# rspec failure tracking
+.rspec_status

@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+Signal.trap("INT") { exit 1 }
+
+require "optparse"
+require "tty-markdown"
+
+options = {}
+
+ARGV << "-h" if ARGV.empty? && $stdin.tty?
+
+parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{::File.basename($0)} [options] [file]"
+
+  opts.on("-h", "--help", "Display help" ) do
+    puts opts
+    exit
+  end
+
+  opts.on("-v", "--version", "Display the version") do
+    puts "0.1.0 (tty-markdown #{TTY::Markdown::VERSION})"
+    exit
+  end
+end
+
+begin
+  parser.parse!
+rescue OptionParser::ParseError => error
+  $stderr.puts error.message
+  exit 1
+end
+
+text = ARGV[0] ? ARGV.pop : $stdin.read
+
+if ::File.file?(text)
+  print TTY::Markdown.parse_file(text, **options)
+else
+  print TTY::Markdown.parse(text, **options)
+end
