@@ -7,18 +7,16 @@ RSpec.describe "tty-markdown command" do
   let(:cmd) { RSpec::Support::OS.windows? ? "tty-markdown" : "exe/tty-markdown" }
 
   it "runs with piped input" do
-    out, err, status = Open3.capture3("echo **bold** | #{cmd}")
+    out, status = Open3.capture2("echo **bold** | #{cmd}")
 
     expect(out).to match(/\e\[33;1mbold\e\[0m/)
-    expect(err).to eq("")
     expect(status.exitstatus).to eq(0)
   end
 
   it "runs with text input" do
-    out, err, status = Open3.capture3("#{cmd} \"#Header\"")
+    out, status = Open3.capture2("#{cmd} \"#Header\"")
 
     expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
-    expect(err).to eq("")
     expect(status.exitstatus).to eq(0)
   end
 
@@ -28,10 +26,9 @@ RSpec.describe "tty-markdown command" do
       tempfile.write("#Header")
       tempfile.rewind
 
-      out, err, status = Open3.capture3("#{cmd} #{tempfile.path}")
+      out, status = Open3.capture2("#{cmd} #{tempfile.path}")
 
       expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
-      expect(err).to eq("")
       expect(status.exitstatus).to eq(0)
     ensure
       tempfile.close
@@ -39,14 +36,22 @@ RSpec.describe "tty-markdown command" do
     end
   end
 
+  it "uses only ASCII symbols" do
+    out, status = Open3.capture2("#{cmd} --ascii \"* list item\"")
+
+    expect(out).to match(/\e\[33m\*\e\[0m list item/)
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "prints help" do
     out, err, status = Open3.capture3("#{cmd} --help")
 
     expect(out).to eq([
-      "Usage: tty-markdown [options] [file]\n",
-      "    -h, --help                       Display help\n",
+      "Usage: tty-markdown [options] [file]",
+      "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
+      "    -h, --help                       Display help",
       "    -v, --version                    Display the version\n"
-    ].join)
+    ].join("\n"))
     expect(err).to eq("")
     expect(status.exitstatus).to eq(0)
   end

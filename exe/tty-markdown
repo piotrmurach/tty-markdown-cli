@@ -12,6 +12,10 @@ ARGV << "-h" if ARGV.empty? && $stdin.tty?
 parser = OptionParser.new do |opts|
   opts.banner = "Usage: #{::File.basename($0)} [options] [file]"
 
+  opts.on("-a", "--ascii", "Use ASCII symbols (default UTF-8)") do
+    options[:symbols] = :ascii
+  end
+
   opts.on("-h", "--help", "Display help" ) do
     puts opts
     exit
