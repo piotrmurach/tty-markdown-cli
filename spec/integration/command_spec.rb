@@ -50,6 +50,13 @@ RSpec.describe "tty-markdown command" do
     expect(status.exitstatus).to eq(0)
   end
 
+  it "specifies zero colors" do
+    out, status = Open3.capture2("#{cmd} --colors 0 '\`foo = {}\`'")
+
+    expect(out).to match(/^foo = {}/)
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "changes output indentation" do
     out, status = Open3.capture2("#{cmd} --indent 1 \"### Header\"")
 
