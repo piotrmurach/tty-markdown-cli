@@ -43,6 +43,13 @@ RSpec.describe "tty-markdown command" do
     expect(status.exitstatus).to eq(0)
   end
 
+  it "specifies maximum number of colors" do
+    out, status = Open3.capture2("#{cmd} --colors 16 '\`foo = {}\`'")
+
+    expect(out).to match(/\e\[33mfoo = {}\e\[0m/)
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "changes output indentation" do
     out, status = Open3.capture2("#{cmd} --indent 1 \"### Header\"")
 
@@ -63,6 +70,7 @@ RSpec.describe "tty-markdown command" do
     expect(out).to eq([
       "Usage: tty-markdown [options] [file]",
       "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
+      "    -c, --colors n                   Maximum number of colors (default auto detect)",
       "    -i, --indent n                   Indentation amount (default 2 spaces)",
       "    -w, --width n                    Maximum output width (default full terminal)",
       "    -h, --help                       Display help",

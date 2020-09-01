@@ -16,6 +16,10 @@ parser = OptionParser.new do |opts|
     options[:symbols] = :ascii
   end
 
+  opts.on("-c n", "--colors n", "Maximum number of colors (default auto detect)") do |n|
+    options[:colors] = n.to_i
+  end
+
   opts.on("-i n", "--indent n", "Indentation amount (default 2 spaces)") do |n|
     options[:indent] = n.to_i
   end
