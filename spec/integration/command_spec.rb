@@ -43,6 +43,13 @@ RSpec.describe "tty-markdown command" do
     expect(status.exitstatus).to eq(0)
   end
 
+  it "changes output indentation" do
+    out, status = Open3.capture2("#{cmd} --indent 1 \"### Header\"")
+
+    expect(out).to match(/^  \e\[36;1mHeader\e\[0m/)
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "sets maximum output width" do
     out, status = Open3.capture2("#{cmd} --width 30 \"It is not down on any map; true places never are.\"")
 
@@ -56,6 +63,7 @@ RSpec.describe "tty-markdown command" do
     expect(out).to eq([
       "Usage: tty-markdown [options] [file]",
       "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
+      "    -i, --indent n                   Indentation amount (default 2 spaces)",
       "    -w, --width n                    Maximum output width (default full terminal)",
       "    -h, --help                       Display help",
       "    -v, --version                    Display the version\n"
