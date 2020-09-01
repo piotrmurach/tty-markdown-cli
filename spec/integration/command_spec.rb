@@ -43,12 +43,20 @@ RSpec.describe "tty-markdown command" do
     expect(status.exitstatus).to eq(0)
   end
 
+  it "sets maximum output width" do
+    out, status = Open3.capture2("#{cmd} --width 30 \"It is not down on any map; true places never are.\"")
+
+    expect(out).to eq("It is not down on any map; \ntrue places never are.\n")
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "prints help" do
     out, err, status = Open3.capture3("#{cmd} --help")
 
     expect(out).to eq([
       "Usage: tty-markdown [options] [file]",
       "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
+      "    -w, --width n                    Maximum output width (default full terminal)",
       "    -h, --help                       Display help",
       "    -v, --version                    Display the version\n"
     ].join("\n"))
