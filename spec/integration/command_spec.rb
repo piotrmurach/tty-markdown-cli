@@ -50,8 +50,8 @@ RSpec.describe "tty-markdown command" do
     expect(status.exitstatus).to eq(0)
   end
 
-  it "specifies zero colors" do
-    out, status = Open3.capture2("#{cmd} --colors 0 '\`foo = {}\`'")
+  it "specifies no coloring" do
+    out, status = Open3.capture2("#{cmd} --color never '\`foo = {}\`'")
 
     expect(out).to match(/^foo = {}/)
     expect(status.exitstatus).to eq(0)
@@ -78,6 +78,7 @@ RSpec.describe "tty-markdown command" do
       "Usage: tty-markdown [options] [file]",
       "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
       "    -c, --colors n                   Maximum number of colors (default auto detect)",
+      "        --color when                 When to color content. Valid values are never, always or auto. (default auto)",
       "    -i, --indent n                   Indentation amount (default 2 spaces)",
       "    -w, --width n                    Maximum output width (default full terminal)",
       "    -h, --help                       Display help",

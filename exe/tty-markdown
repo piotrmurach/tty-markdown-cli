@@ -20,6 +20,11 @@ parser = OptionParser.new do |opts|
     options[:colors] = n.to_i
   end
 
+  opts.on("--color when", "When to color content. Valid values are never, " \
+                          "always or auto. (default auto)") do |w|
+    options[:color] = w
+  end
+
   opts.on("-i n", "--indent n", "Indentation amount (default 2 spaces)") do |n|
     options[:indent] = n.to_i
   end
