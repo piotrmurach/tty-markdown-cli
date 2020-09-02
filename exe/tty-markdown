@@ -16,8 +16,8 @@ parser = OptionParser.new do |opts|
     options[:symbols] = :ascii
   end
 
-  opts.on("-c n", "--colors n", "Maximum number of colors (default auto detect)") do |n|
-    options[:colors] = n.to_i
+  opts.on("-m n", "--mode n", "Maximum number of colors (default auto detect)") do |n|
+    options[:mode] = n.to_i
   end
 
   opts.on("--color when", "When to color content. Valid values are never, " \
