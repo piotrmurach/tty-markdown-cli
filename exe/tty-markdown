@@ -20,8 +20,9 @@ parser = OptionParser.new do |opts|
     options[:mode] = n.to_i
   end
 
-  opts.on("--color when", "When to color content. Valid values are never, " \
-                          "always or auto. (default auto)") do |w|
+  opts.on("-c when", "--color when",
+          "When to color content. Valid values are never, " \
+          "always or auto. (default auto)") do |w|
     options[:color] = w
   end
 

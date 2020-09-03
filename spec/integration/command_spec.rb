@@ -78,7 +78,7 @@ RSpec.describe "tty-markdown command" do
       "Usage: tty-markdown [options] [file]",
       "    -a, --ascii                      Use ASCII symbols (default UTF-8)",
       "    -m, --mode n                     Maximum number of colors (default auto detect)",
-      "        --color when                 When to color content. Valid values are never, always or auto. (default auto)",
+      "    -c, --color when                 When to color content. Valid values are never, always or auto. (default auto)",
       "    -i, --indent n                   Indentation amount (default 2 spaces)",
       "    -w, --width n                    Maximum output width (default full terminal)",
       "    -h, --help                       Display help",
