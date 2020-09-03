@@ -36,6 +36,13 @@ RSpec.describe "tty-markdown command" do
     end
   end
 
+  it "runs command alias", unless: RSpec::Support::OS.windows?  do
+    out, status = Open3.capture2("exe/ttymarkdown \"#Header\"")
+
+    expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
+    expect(status.exitstatus).to eq(0)
+  end
+
   it "uses only ASCII symbols" do
     out, status = Open3.capture2("#{cmd} --ascii \"* list item\"")
 

@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.files         = ["man/tty-markdown.1"]
   spec.extra_rdoc_files = Dir["README.md", "CHANGELOG.md", "LICENSE.txt"]
   spec.bindir        = "exe"
-  spec.executables   = ["tty-markdown"]
+  spec.executables   = ["tty-markdown", "ttymarkdown"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.0.0")
 
   spec.add_dependency "tty-markdown", "~> 0.7"
