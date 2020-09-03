@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
   spec.executables   = ["tty-markdown"]
   spec.required_ruby_version = Gem::Requirement.new(">= 2.0.0")
 
-  #spec.add_dependency "tty-markdown", "~> 0.7"
+  spec.add_dependency "tty-markdown", "~> 0.7"
 
   spec.add_development_dependency "kramdown", ">= 1.16.2"
   spec.add_development_dependency "rake"
