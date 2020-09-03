@@ -39,13 +39,41 @@ $ tty-markdown --help
 To preview a Markdown document like this `README.md`:
 
 ```bash
-# tty-markdown README.md
+$ tty-markdown README.md
 ```
 
 To pipe a Markdown document like this `README.md` file:
 
 ```bash
 $ cat README.md | tty-markdown
+```
+
+By default `UTF-8` symbols are used to display terminal output but you can fallback on more widely supported `ASCII` set with `-a/--ascii`:
+
+```bash
+$ tty-markdown -a README.md
+$ tty-markdown --ascii README.md
+```
+
+Further, you can control the amount of indentation with `-i/--indent` option. By default 2 spaces are used but you can, for example, remove any indentation:
+
+```bash
+$ tty-markdown -i 0 README.md
+$ tty-markdown --indent 0 README.md
+```
+
+You can also use `-w/--width` option to specify the maximum output width. By default the output will span the full terminal width. To make output wrap around `80` characters do:
+
+```bash
+$ tty-markdown -w 80 README.md
+$ tty-markdown --width 80 README.md
+```
+
+To control output coloring, use `-c/--color` option with `always`, `never` or `auto`:
+
+```bash
+$ tty-markdown -c always README
+$ tty-markdown --color always README
 ```
 
 ## Development
