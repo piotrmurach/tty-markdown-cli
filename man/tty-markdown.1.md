@@ -17,11 +17,14 @@ The options are as follows:
 `-a`, `--ascii`
 : Use ASCII symbols.
 
-`-c n`, `--colors n`
-: Maximum number of colors supported by the terminal (default auto detect).
+`-c when`, `--color when`
+: When to color content. Valid values are `never`, `always` or `auto`. (default auto)
 
 `-i n`, `--indent n`
 : Indentation amount (default 2 spaces).
+
+`-m n`, `--mode n`
+: Maximum number of colors supported by the terminal (default auto detect).
 
 `-w n`, `--width n`
 : Maximum output width (default full terminal width).
