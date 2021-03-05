@@ -7,14 +7,14 @@ RSpec.describe "tty-markdown command" do
   let(:cmd) { RSpec::Support::OS.windows? ? "tty-markdown" : "exe/tty-markdown" }
 
   it "runs with piped input" do
-    out, status = Open3.capture2("echo **bold** | #{cmd}")
+    out, status = Open3.capture2("echo **bold** | #{cmd} -c always")
 
     expect(out).to match(/\e\[33;1mbold\e\[0m/)
     expect(status.exitstatus).to eq(0)
   end
 
   it "runs with text input" do
-    out, status = Open3.capture2("#{cmd} \"#Header\"")
+    out, status = Open3.capture2("#{cmd} -c always \"#Header\"")
 
     expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
     expect(status.exitstatus).to eq(0)
@@ -26,7 +26,7 @@ RSpec.describe "tty-markdown command" do
       tempfile.write("#Header")
       tempfile.rewind
 
-      out, status = Open3.capture2("#{cmd} #{tempfile.path}")
+      out, status = Open3.capture2("#{cmd} -c always #{tempfile.path}")
 
       expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
       expect(status.exitstatus).to eq(0)
@@ -37,21 +37,21 @@ RSpec.describe "tty-markdown command" do
   end
 
   it "runs command alias", unless: RSpec::Support::OS.windows?  do
-    out, status = Open3.capture2("exe/ttymarkdown \"#Header\"")
+    out, status = Open3.capture2("exe/ttymarkdown -c always \"#Header\"")
 
     expect(out).to match(/\e\[36;1;4mHeader\e\[0m/)
     expect(status.exitstatus).to eq(0)
   end
 
   it "uses only ASCII symbols" do
-    out, status = Open3.capture2("#{cmd} --ascii \"* list item\"")
+    out, status = Open3.capture2("#{cmd} -c always --ascii \"* list item\"")
 
     expect(out).to match(/\e\[33m\*\e\[0m list item/)
     expect(status.exitstatus).to eq(0)
   end
 
   it "specifies maximum number of colors" do
-    out, status = Open3.capture2("#{cmd} --mode 16 '\`foo = {}\`'")
+    out, status = Open3.capture2("#{cmd} -c always --mode 16 '\`foo = {}\`'")
 
     expect(out).to match(/\e\[33mfoo = {}\e\[0m/)
     expect(status.exitstatus).to eq(0)
@@ -65,7 +65,7 @@ RSpec.describe "tty-markdown command" do
   end
 
   it "changes output indentation" do
-    out, status = Open3.capture2("#{cmd} --indent 1 \"### Header\"")
+    out, status = Open3.capture2("#{cmd} -c always --indent 1 \"### Header\"")
 
     expect(out).to match(/^  \e\[36;1mHeader\e\[0m/)
     expect(status.exitstatus).to eq(0)

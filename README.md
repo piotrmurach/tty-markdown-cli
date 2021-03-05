@@ -1,11 +1,11 @@
 # TTY::Markdown CLI
 
 [![Gem Version](https://badge.fury.io/rb/tty-markdown-cli.svg)][gem]
-[![Build Status](https://secure.travis-ci.org/piotrmurach/tty-markdown-cli.svg?branch=master)][travis]
+[![Actions CI](https://github.com/piotrmurach/tty-markdown-cli/workflows/CI/badge.svg?branch=master)][gh_actions_ci]
 [![Build status](https://ci.appveyor.com/api/projects/status/3i2mn2nh9hq1cag2?svg=true)][appveyor]
 
 [gem]: http://badge.fury.io/rb/tty-markdown-cli
-[travis]: http://travis-ci.org/piotrmurach/tty-markdown-cli
+[gh_actions_ci]: https://github.com/piotrmurach/tty-markdown-cli/actions?query=workflow%3ACI
 [appveyor]: https://ci.appveyor.com/project/piotrmurach/tty-markdown-cli
 
 > CLI tool for displaying Markdown documents in a nicely formatted terminal output.
