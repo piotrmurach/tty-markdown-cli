@@ -36,6 +36,9 @@ jobs:
           - jruby-head
           - truffleruby-head
         include:
+          - ruby: 2.0
+            os: ubuntu-latest
+            bundler: 1
           - ruby: 2.1
             os: ubuntu-latest
             bundler: 1
